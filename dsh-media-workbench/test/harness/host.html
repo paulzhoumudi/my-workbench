@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DSH 宿主模拟</title>
+<style>
+  :root{--dsw-alias-bg-module-platform:#F4F5F7;--dsw-alias-bg-layer-1:#fff;--dsw-alias-bg-layer-2:#FAFBFC;--dsw-alias-border-l2:#E3E5E8;--dsw-alias-border-l1:#EEF0F2;--dsw-alias-label-primary:#1F2329;--dsw-alias-label-secondary:#4E5969;--dsw-alias-label-tertiary:#8F959E;--dsw-alias-brand-primary:#3D5AFE;--dsw-alias-button-primary-fill:#3D5AFE}
+  html.dark{--dsw-alias-bg-module-platform:#141518;--dsw-alias-bg-layer-1:#1D1E22;--dsw-alias-bg-layer-2:#24262B;--dsw-alias-border-l2:#33363D;--dsw-alias-border-l1:#2A2C31;--dsw-alias-label-primary:#E8EAED;--dsw-alias-label-secondary:#B4B8BF;--dsw-alias-label-tertiary:#80858E;--dsw-alias-brand-primary:#7C8FFF;--dsw-alias-button-primary-fill:#5468F0;--dsw-alias-interactive-bg-hover:rgba(255,255,255,.06);--dsw-alias-state-business-tertiary:rgba(124,143,255,.14)}
+  html,body{margin:0;height:100%;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--dsw-alias-bg-module-platform)}
+  #shell{display:flex;height:100vh}
+  #side{width:var(--side,240px);flex-shrink:0;background:#ECEDF0;border-right:1px solid #DDD;padding:12px;box-sizing:border-box;font-size:13px;color:#555}
+  html.dark #side{background:#18191C;border-color:#2A2C31;color:#999}
+  #frame{flex:1;min-width:0;display:flex;flex-direction:column}
+  .fake-conv{display:flex;flex-direction:column;flex:1;min-height:0}
+  .fake-msgs{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px;font-size:13px}
+  .fake-msgs .u{align-self:flex-end;background:#3D5AFE;color:#fff;padding:8px 11px;border-radius:10px;max-width:85%}
+  .fake-msgs .a{align-self:flex-start;background:var(--dsw-alias-bg-layer-2);padding:8px 11px;border-radius:10px;max-width:85%;color:var(--dsw-alias-label-primary)}
+  .fake-msgs .t{border:1px solid var(--dsw-alias-border-l2);border-radius:8px;padding:6px 9px;font-size:12px;color:var(--dsw-alias-label-secondary)}
+  .fake-msgs .ask{border:1px solid #F3C478;background:#FFF8EC;border-radius:8px;padding:8px 10px;font-size:12px;color:#7a4b00}
+  .fake-composer{margin:10px 12px 12px;border:1px solid var(--dsw-alias-border-l2);border-radius:12px;padding:8px;background:var(--dsw-alias-bg-layer-1)}
+  .fake-composer textarea{width:100%;border:0;resize:none;height:52px;font:inherit;font-size:13px;background:transparent;color:var(--dsw-alias-label-primary);outline:none}
+</style>
+<script src="/vendor/react.js"></script>
+<script src="/vendor/react-dom.js"></script>
+</head>
+<body>
+<div id="shell"><div id="side"><b>DSH Desktop（模拟）</b><br><br>工作台 ▾ 媒体剪辑工作台<br><br><span id="sessions"></span></div><div id="frame"></div></div>
+<script>
+const PICK_DIR = __PICK_DIR__
+const DEMO_DIR = __DEMO_DIR__
+const h = React.createElement
+const listeners = new Set()
+const state = { byId: {}, current: null, workspaces: [], draft: '', seq: 0 }
+const emit = () => { state.seq++; listeners.forEach((l) => l()) }
+const subscribe = (l) => { listeners.add(l); return () => listeners.delete(l) }
+window.__harness = { state, emit, startDemoSession: () => service._ensureSession({ folder: DEMO_DIR }) }
+const conversationService = { input: { shell: (id) => ({ setDraft: (text) => { state.draft = text; emit() }, focus() {} }) } }
+const service = {
+  ctx: {
+    sessions: { list: { subscribe, getSnapshot: () => ({ byId: state.byId, seq: state.seq }) }, refresh: async () => {} },
+    workspaces: { list: { subscribe, getSnapshot: () => ({ items: state.workspaces }) }, create: async ({ path }) => {
+      let ws = state.workspaces.find((w) => w.path === path)
+      if (!ws) { ws = { workspaceId: 'ws' + state.workspaces.length, path, title: path.split('/').pop(), sessionIds: [] }; state.workspaces.push(ws) }
+      return ws
+    } },
+    uiWorkspace: { pickDirectory: async () => PICK_DIR, openSession: (id) => { state.current = id; emit() } },
+    get: (name) => (name === 'conversation' ? conversationService : undefined)
+  },
+  subscribe, getSnapshot: () => state.seq,
+  currentSession: () => state.current,
+  workspaceFor: (id) => state.workspaces.find((w) => w.sessionIds.includes(id)),
+  ownsSession: () => { throw new Error('Workbench registration requires a client package entry name.') },
+  // Like Desktop: the panel-facing root instance has no caller package identity.
+  ensureSession() { return Promise.reject(new Error('Workbench registration requires a client package entry name.')) },
+  async _ensureSession({ folder, sessionId }) {
+    await new Promise((r) => setTimeout(r, 150))
+    const ws = await service.ctx.workspaces.create({ path: folder })
+    let id = sessionId && state.byId[sessionId] ? sessionId : null
+    if (!id) { id = 'sess' + Object.keys(state.byId).length; state.byId[id] = { id }; ws.sessionIds.push(id) }
+    state.current = id
+    emit()
+    return id
+  }
+}
+function FakeConversation() {
+  React.useSyncExternalStore(subscribe, () => state.seq)
+  return h('div', { className: 'fake-conv' },
+    h('div', { className: 'fake-msgs' },
+      h('div', { className: 't', id: 'fake-cwd' }, '工作区：' + (service.workspaceFor(state.current)?.path || '')),
+      h('div', { className: 'u' }, '帮我把文案改得更口语一点，控制在 90 秒内'),
+      h('div', { className: 't' }, '▸ media_creative_read  01_creative/02_文案.md（v1）'),
+      h('div', { className: 'ask' }, '需要确认：覆盖 02_文案.md（v1 → v2），旧版本自动存入 _history，可随时回滚  [允许] [拒绝]'),
+      h('div', { className: 't' }, '▸ media_creative_write  02_文案.md → v2 ✓'),
+      h('div', { className: 'a' }, '已改成口语化版本 v2：约 300 字，按 3.5 字/秒估算朗读约 86 秒。左侧面板已刷新，可点「对比 v1」查看改动。')),
+    h('div', { className: 'fake-composer' }, h('textarea', { id: 'fake-composer', 'aria-label': '原生输入框', value: state.draft, onChange: (e) => { state.draft = e.target.value; emit() }, placeholder: '（宿主原生会话输入框）' })))
+}
+let Registered = null
+const shared = { react: React, 'react-dom': ReactDOM }
+window.__ModuleLoader__ = { load({ id, factory }) {
+  const mod = factory((name) => { if (shared[name]) return shared[name]; throw new Error('missing ' + name) })
+  // ctx.desktopWorkbenches is bound to the calling plugin, so identity-checked calls work through it.
+  const bound = Object.assign(Object.create(service), {
+    register: (desc, Component) => { Registered = { desc, Component }; console.log('registered', JSON.stringify(desc)); return () => {} },
+    ensureSession: (args) => service._ensureSession(args),
+    ownsSession: () => true
+  })
+  const ctx = { effect: (fn) => fn(), desktopWorkbenches: bound }
+  mod.apply(ctx)
+} }
+function Host() {
+  React.useSyncExternalStore(subscribe, () => state.seq)
+  document.getElementById('sessions').textContent = Object.keys(state.byId).map((id) => '💬 ' + id + (id === state.current ? '（当前）' : '')).join('  ')
+  const conversation = h('div', { style: { display: state.current ? 'contents' : 'none' } }, h(FakeConversation))
+  return h(Registered.Component, { service, entry: Registered.desc, active: true, conversation })
+}
+const s = document.createElement('script')
+s.src = '/client.js'
+s.onload = () => ReactDOM.createRoot(document.getElementById('frame')).render(h(Host))
+document.body.appendChild(s)
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xmeml>
+<xmeml version="5">
+  <sequence id="sequence-1">
+    <name>AI选片_ABC_20261026-2125</name>
+    <duration>420</duration>
+    <rate><timebase>25</timebase><ntsc>FALSE</ntsc></rate>
+    <media>
+      <video>
+        <format><samplecharacteristics><rate><timebase>25</timebase><ntsc>FALSE</ntsc></rate><width>3840</width><height>2160</height><pixelaspectratio>square</pixelaspectratio><fielddominance>none</fielddominance></samplecharacteristics></format>
+        <track>
+          <clipitem id="clipitem-v1"><name>A P1000392.MOV 00:00.0</name><enabled>TRUE</enabled><duration>420</duration><rate><timebase>25</timebase><ntsc>FALSE</ntsc></rate><start>0</start><end>420</end><in>0</in><out>420</out><file id="file-1"><name>P1000392.MOV</name><pathurl>file://localhost/E:/%E8%A7%86%E9%A2%91%E5%88%9B%E4%BD%9C/%E6%B5%8B%E8%AF%95%E7%B4%A0%E6%9D%90/10.14%E8%9B%8B%E7%82%8E%E6%B5%8B%E8%AF%95/P1000392.MOV</pathurl><rate><timebase>25</timebase><ntsc>FALSE</ntsc></rate><duration>420</duration><media><video><samplecharacteristics><rate><timebase>25</timebase><ntsc>FALSE</ntsc></rate><width>3840</width><height>2160</height></samplecharacteristics></video><audio><channelcount>2</channelcount></audio></media></file><comments><mastercomment1>A·直接可用 | 技术指标优秀</mastercomment1></comments><labels><label2>Forest</label2></labels><link><linkclipref>clipitem-v1</linkclipref><mediatype>video</mediatype><trackindex>1</trackindex><clipindex>1</clipindex></link><link><linkclipref>clipitem-a1</linkclipref><mediatype>audio</mediatype><trackindex>1</trackindex><clipindex>1</clipindex></link></clipitem>
+        </track>
+      </video>
+      <audio>
+        <track>
+          <clipitem id="clipitem-a1"><name>A P1000392.MOV 00:00.0</name><enabled>TRUE</enabled><duration>420</duration><rate><timebase>25</timebase><ntsc>FALSE</ntsc></rate><start>0</start><end>420</end><in>0</in><out>420</out><file id="file-1"/><sourcetrack><mediatype>audio</mediatype><trackindex>1</trackindex></sourcetrack><link><linkclipref>clipitem-v1</linkclipref><mediatype>video</mediatype><trackindex>1</trackindex><clipindex>1</clipindex></link><link><linkclipref>clipitem-a1</linkclipref><mediatype>audio</mediatype><trackindex>1</trackindex><clipindex>1</clipindex></link></clipitem>
+        </track>
+      </audio>
+    </media>
+  </sequence>
+</xmeml>

@@ -1,0 +1,16 @@
+{
+ "id": "760fb20c-bf87-4970-aa88-ca962a2a64b1",
+ "createdAt": "2026-10-26T13:25:13.109Z",
+ "inputs": [
+  "E:\\视频创作\\测试素材\\10.14蛋炎测试\\P1000392.MOV"
+ ],
+ "recursive": true,
+ "options": {
+  "strictness": "standard",
+  "log": false,
+  "hwaccel": false
+ },
+ "vlm": {
+  "enabled": false
+ }
+}

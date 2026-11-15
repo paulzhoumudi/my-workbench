@@ -1,0 +1,5 @@
+- insert:
+    - id: dsh-media-workbench
+      name: dsh-media-workbench
+      config:
+        root: !!js dshHomePath('dsh-media-workbench')

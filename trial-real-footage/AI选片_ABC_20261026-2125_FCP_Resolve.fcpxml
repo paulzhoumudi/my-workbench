@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fcpxml>
+<fcpxml version="1.10">
+  <resources>
+    <format id="r1" frameDuration="100/2500s" width="3840" height="2160"/>
+    <asset id="a1" name="P1000392.MOV" start="0s" duration="42000/2500s" hasVideo="1" format="r1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///E:/%E8%A7%86%E9%A2%91%E5%88%9B%E4%BD%9C/%E6%B5%8B%E8%AF%95%E7%B4%A0%E6%9D%90/10.14%E8%9B%8B%E7%82%8E%E6%B5%8B%E8%AF%95/P1000392.MOV"/>
+    </asset>
+  </resources>
+  <library>
+    <event name="AI选片_ABC_20261026-2125">
+      <project name="AI选片_ABC_20261026-2125">
+        <sequence format="r1" duration="42000/2500s" tcStart="0s" tcFormat="NDF">
+          <spine>
+          <asset-clip ref="a1" offset="0s" name="A P1000392.MOV 00:00.0" start="0s" duration="42000/2500s" format="r1" tcFormat="NDF">
+            <note>A·直接可用 | 技术指标优秀</note>
+            <keyword start="0s" duration="42000/2500s" value="A"/>
+            <marker start="0s" duration="100/2500s" value="A·直接可用 | 技术指标优秀"/>
+          </asset-clip>
+          </spine>
+        </sequence>
+      </project>
+    </event>
+  </library>
+</fcpxml>

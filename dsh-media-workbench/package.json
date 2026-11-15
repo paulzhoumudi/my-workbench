@@ -1,0 +1,71 @@
+{
+  "name": "dsh-media-workbench",
+  "version": "0.1.4",
+  "description": "DSH Desktop 媒体自动化剪辑工作台：创意文案、素材清洗打标、分镜匹配与出片，左边看结果，右边跟 AI 说。",
+  "type": "module",
+  "main": "./dsh/index.js",
+  "exports": {
+    ".": "./dsh/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  },
+  "files": [
+    "dsh/index.js",
+    "lib/client.js",
+    "skills",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/*.test.mjs",
+    "prepack": "node scripts/build.mjs"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "dsh-workbench",
+    "video",
+    "ffmpeg",
+    "eagle"
+  ],
+  "author": "paulzhou",
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "dsh-desktop-workbenches"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": ">=4.0.1 <5.0.0-0",
+    "@deepseek-ai/schemastery": ">=3.18.2 <4.0.0-0",
+    "@deepseek-ai/dsh-client-connection": ">=0.1.5-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-tools": ">=0.1.5-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-skill": ">=0.1.5-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-system-prompt": ">=0.1.5-rc.2 <0.3.0-0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-skill": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-system-prompt": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "esbuild": "0.24.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "yaml": "2.6.1"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "name": "dsh-profile-web",
+  "private": true,
+  "dependencies": {
+    "dshmarket": "^1.66.20",
+    "dsh-content-workbench": "0.2.1",
+    "dsh-media-workbench": "0.1.5",
+    "dsh-seedance": "0.1.0",
+    "dsh-skills-marketplace": "1.1.2",
+    "zhao-media-workbench": "0.1.3"
+  },
+  "dsh": {
+    "profile": {
+      "bundles": [
+        "@deepseek-ai/dsh-base",
+        "@deepseek-ai/dsh-web-app",
+        "dshmarket",
+        "dsh-content-workbench",
+        "dsh-media-workbench",
+        "dsh-seedance",
+        "dsh-skills-marketplace",
+        "zhao-media-workbench"
+      ]
+    },
+    "desktop": {
+      "generationProjection": {
+        "version": 1,
+        "plugins": {
+          "dsh-content-workbench": {
+            "generationId": "dsh-content-workbench+0.2.1+ea310c364c38",
+            "visibleVersion": "0.2.1",
+            "previousOverride": {
+              "present": false
+            }
+          },
+          "dsh-media-workbench": {
+            "generationId": "dsh-media-workbench+0.1.5+48b40035f3ed",
+            "visibleVersion": "0.1.5",
+            "previousOverride": {
+              "present": false
+            }
+          },
+          "dsh-seedance": {
+            "generationId": "dsh-seedance+0.1.0+4b1496e89d57",
+            "visibleVersion": "0.1.0",
+            "previousOverride": {
+              "present": false
+            }
+          },
+          "dsh-skills-marketplace": {
+            "generationId": "dsh-skills-marketplace+1.1.2+891ecef4c78e",
+            "visibleVersion": "1.1.2",
+            "previousOverride": {
+              "present": false
+            }
+          },
+          "zhao-media-workbench": {
+            "generationId": "zhao-media-workbench+0.1.3+32823a0b1b85",
+            "visibleVersion": "0.1.3",
+            "previousOverride": {
+              "present": false
+            }
+          }
+        }
+      }
+    }
+  },
+  "pnpm": {
+    "overrides": {
+      "dsh-content-workbench": "link:../.generations/live/dsh-content-workbench+0.2.1+ea310c364c38/node_modules/dsh-content-workbench",
+      "dsh-media-workbench": "link:../.generations/live/dsh-media-workbench+0.1.5+48b40035f3ed/node_modules/dsh-media-workbench",
+      "dsh-seedance": "link:../.generations/live/dsh-seedance+0.1.0+4b1496e89d57/node_modules/dsh-seedance",
+      "dsh-skills-marketplace": "link:../.generations/live/dsh-skills-marketplace+1.1.2+891ecef4c78e/node_modules/dsh-skills-marketplace",
+      "zhao-media-workbench": "link:../.generations/live/zhao-media-workbench+0.1.3+32823a0b1b85/node_modules/zhao-media-workbench"
+    }
+  }
+}

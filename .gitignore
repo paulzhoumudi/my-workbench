@@ -1,0 +1,32 @@
+# dependencies and caches
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+Thumbs.db
+*.log
+
+# build and packed releases
+dist/
+*.tgz
+*.tar.gz
+*.zip
+
+# secrets
+.env
+.env.*
+secrets.json
+*.pem
+*.key
+
+# editor
+.idea/
+.vscode/
+*.swp
+
+# historical extracts kept on disk only
+dsh-media-workbench-*/
+footage-clean-src/

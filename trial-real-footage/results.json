@@ -1,0 +1,203 @@
+{
+ "version": 1,
+ "id": "760fb20c-bf87-4970-aa88-ca962a2a64b1",
+ "status": "done",
+ "phase": "done",
+ "createdAt": "2026-10-26T13:25:13.109Z",
+ "startedAt": "2026-10-26T13:25:13.112Z",
+ "finishedAt": "2026-10-26T13:25:17.432Z",
+ "request": {
+  "id": "760fb20c-bf87-4970-aa88-ca962a2a64b1",
+  "createdAt": "2026-10-26T13:25:13.109Z",
+  "inputs": [
+   "E:\\视频创作\\测试素材\\10.14蛋炎测试\\P1000392.MOV"
+  ],
+  "recursive": true,
+  "options": {
+   "strictness": "standard",
+   "log": false,
+   "hwaccel": false
+  },
+  "vlm": {
+   "enabled": false
+  }
+ },
+ "error": null,
+ "progress": {
+  "done": 1,
+  "total": 1,
+  "current": "P1000392.MOV"
+ },
+ "focusRefs": {
+  "3840x2160 hevc": {
+   "ref": 1.3106,
+   "samples": 17,
+   "low": false,
+   "raw": 1.3106
+  }
+ },
+ "files": [
+  {
+   "index": 0,
+   "path": "E:\\视频创作\\测试素材\\10.14蛋炎测试\\P1000392.MOV",
+   "name": "P1000392.MOV",
+   "size": 77238569,
+   "status": "judged",
+   "meta": {
+    "duration": 16.8,
+    "width": 3840,
+    "height": 2160,
+    "fps": 25,
+    "rFrameRate": "25/1",
+    "codec": "hevc",
+    "pixFmt": "yuv420p10le",
+    "colorTransfer": "bt709",
+    "bitRate": 36780270,
+    "hasAudio": true,
+    "timecode": null
+   },
+   "duration": 16.8,
+   "cuts": [],
+   "timeline": [
+    [
+     0,
+     81,
+     [
+      "jitter"
+     ]
+    ],
+    [
+     1,
+     92,
+     [
+      "jitter"
+     ]
+    ],
+    [
+     2,
+     99,
+     []
+    ],
+    [
+     3,
+     95,
+     []
+    ],
+    [
+     4,
+     100,
+     []
+    ],
+    [
+     5,
+     100,
+     []
+    ],
+    [
+     6,
+     100,
+     []
+    ],
+    [
+     7,
+     100,
+     []
+    ],
+    [
+     8,
+     100,
+     []
+    ],
+    [
+     9,
+     100,
+     []
+    ],
+    [
+     10,
+     100,
+     []
+    ],
+    [
+     11,
+     100,
+     []
+    ],
+    [
+     12,
+     93,
+     [
+      "jitter"
+     ]
+    ],
+    [
+     13,
+     97,
+     []
+    ],
+    [
+     14,
+     100,
+     []
+    ],
+    [
+     15,
+     100,
+     []
+    ],
+    [
+     16,
+     91,
+     [
+      "jitter"
+     ]
+    ]
+   ],
+   "segments": [
+    {
+     "id": "0-s0",
+     "fileIndex": 0,
+     "kind": "candidate",
+     "start": 0,
+     "end": 16.8,
+     "duration": 16.8,
+     "shot": 0,
+     "tech": {
+      "score": 97,
+      "focus": 1.28,
+      "focusRel": 0.98,
+      "shake": 0.171,
+      "mean": 133.4,
+      "motion": 1.93
+     },
+     "flags": [],
+     "short": false,
+     "grade": "A",
+     "gradeReason": "技术指标优秀",
+     "thumb": "0-s0.jpg"
+    }
+   ],
+   "rejected": []
+  }
+ ],
+ "summary": {
+  "files": 1,
+  "analyzed": 1,
+  "failed": 0,
+  "footageSeconds": 16.8,
+  "A": {
+   "count": 1,
+   "seconds": 16.8
+  },
+  "B": {
+   "count": 0,
+   "seconds": 0
+  },
+  "C": {
+   "count": 0,
+   "seconds": 0
+  },
+  "rejectedSeconds": 0
+ },
+ "elapsedSeconds": 4.3
+}

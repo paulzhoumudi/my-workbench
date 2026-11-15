@@ -1,0 +1,5 @@
+- insert:
+    - id: footage-culler
+      name: dsh-footage-culler
+      config:
+        root: !!js dshHomePath('footage-culler')
